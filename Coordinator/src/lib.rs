@@ -4,6 +4,8 @@ use gstd::{errors::Result, msg , prelude::*,ActorId};
 use gmeta::{Metadata};
 use hashbrown::HashMap;
 use io::*;
+use gstd::Encode;
+use crate::codec::WrapperTypeEncode;
 
 #[cfg(feature = "binary-vendor")]
 include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
@@ -63,7 +65,7 @@ fn handle_state() -> Result<()> {
                 // Puedes devolver un error o enviar una respuesta personalizada
                 // msg::reply(Error::new(0, "El usuario ya está registrado"), 0)?;
                 // O puedes simplemente retornar Ok(()) si no deseas manejar el error
-                msg::reply(Error::new(0, "El usuario ya está registrado"), 0)?;
+                msg::reply("usuarioExistente", 0)?;
                 return Ok(());
             }
             // Registra al usuario agregando su ActorId al estado

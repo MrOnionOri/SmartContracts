@@ -23,14 +23,16 @@ pub enum Action {
     BuyItemFromMarket,
     SellItemToMarket,
     SellItemToUser,
-    AddItemToInventory
+    AddItemToInventory,
+    ExampleAction
 }
 
 #[derive(Encode, Decode, TypeInfo, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug)]
 pub enum  Event {
     
     // Add Events
-    UserRegistered(ActorId)
+    UserRegistered(ActorId),
+    ExampleEvent
 }
 
 
@@ -44,13 +46,5 @@ impl Metadata for ContractMetadata{
      type Reply=();
      type Signal = ();
      type State = Vec<(ActorId, u128)>;
-
-     fn init(_init_args: Self::Init) -> Self::State {
-         Vec::new()
-     }
-
-     fn handle(_state: &mut Self::State, action: Self::Handle, _ctx: &MetadataContext) -> Result<Self::Reply, Error> {
-         
-     }
 
 }
