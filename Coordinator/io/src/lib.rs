@@ -7,7 +7,8 @@ use gmeta::{InOut,Metadata};
 #[derive(Encode, Decode, TypeInfo, Hash, PartialEq, PartialOrd, Eq, Ord, Clone, Copy, Debug)]
 pub enum CustomStruct {
 
-    Example
+    WeaponData,
+    ArmosData
 
     // Add States
 }

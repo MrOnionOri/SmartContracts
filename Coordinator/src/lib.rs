@@ -43,6 +43,19 @@ extern "C" fn handle(){
 
 }
 
+#[derive(Debug)] // Deriva Debug para facilitar la impresión con println!
+struct WeaponData {
+    // Define los campos del struct según tus necesidades.
+    name: String,
+    damage: u32,
+    // Otros campos...
+}
+
+#[derive(Debug)]
+struct ArmosData{
+    name: String,
+    shell: u32,
+}
     
 
 fn handle_state() -> Result<()> {
@@ -74,12 +87,30 @@ fn handle_state() -> Result<()> {
             msg::reply(Event::UserRegistered(actor_id), 0)?;
         }
         Action::AddItemWeapon => {
-            // Lógica para manejar la acción AddItemWeapon
-            // Puedes implementar esta parte según tus necesidades
+            let current_state = state_mut();
+
+            let request_name = msg::load::<String>()?;
+
+            let item_weapon = WeaponData {
+                name: request_name.to_string(), // Ejemplo de nombre
+                damage: 20, // Ejemplo de daño
+                // Asigna valores a otros campos según sea necesario
+            };
+            
+            if !current_state.contains_key(&item_weapon) {
+                // Agregar el ítem al estado si no existe.
+                current_state.insert(item_weapon.clone(),1);
+                println!("Ítem agregado: {:?}", item_weapon);
+            } else {
+                println!("El ítem ya existe en el estado: {:?}", item_weapon);
+            }
         }
         Action::AddItemArmor => {
-            // Lógica para manejar la acción AddItemArmor
-            // Puedes implementar esta parte según tus necesidades
+            let current_state = state_mut();
+            
+            let armor_data = ArmosData{
+                
+            };
         }
         _ => {
             // Manejar otras acciones aquí si es necesario
