@@ -107,11 +107,19 @@ fn handle_state() -> Result<()> {
         }
         Action::AddItemArmor => {
             let current_state = state_mut();
-            
+
+            let request_data = msg::load::<HashMap<String, String>>();
+            let name = request_data.get("name").unwrap_or(&"Default name".to_string());
+            let armor = request_data.get("armor").unwrap_or(&"5" as u32);
+
             let armor_data = ArmosData{
-                
+                name: name,
+                armor: armor,
             };
+
+            current_state.insert(armor_data.clone,1);
         }
+        
         _ => {
             // Manejar otras acciones aquí si es necesario
         }

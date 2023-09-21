@@ -1,3 +1,4 @@
 Coordinator/target/cxxbridge
 Coordinator/target/debug
 Coordinator/target/wasm-projects
+Coordinator/target/release
